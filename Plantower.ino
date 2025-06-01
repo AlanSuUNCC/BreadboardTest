@@ -30,7 +30,7 @@ void setupPlantower() {
   // Set to passive mode
   pms.passiveMode();
   
-  Serial.println("✅ Plantower initialized (Passive Mode)");
+  Serial.println("Plantower initialized (Passive Mode)");
   Serial.println("Plantower will cycle: 30s awake, 60s sleep");
   
   lastPmsWakeup = millis();
@@ -42,7 +42,7 @@ void readPlantowerData() {
   switch (currentPmsState) {
     case PMS_WAKE_UP:
       if (currentMillis - lastPmsWakeup >= PMS_SLEEP_PERIOD) {
-        Serial.println("Plantower: 🌅 Waking up sensor (30s warm-up)...");
+        Serial.println("Plantower: Waking up sensor (30s warm-up)...");
         pms.wakeUp();
         lastPmsWakeup = currentMillis;
         currentPmsState = PMS_REQUEST_READ;
@@ -51,7 +51,7 @@ void readPlantowerData() {
 
     case PMS_REQUEST_READ:
       if (currentMillis - lastPmsWakeup >= PMS_WAKE_PERIOD) {
-        Serial.println("Plantower: 📊 Requesting data...");
+        Serial.println("Plantower: Requesting data...");
         pms.requestRead();
         currentPmsState = PMS_READ_DATA;
       }
@@ -75,18 +75,18 @@ void readPlantowerData() {
         Serial.print(pm2_5);
         Serial.print(" μg/m³, PM10 = ");
         Serial.print(pm10_0);
-        Serial.println(" μg/m³ ✅");
+        Serial.println(" μg/m³");
       } else {
         Serial.print("Plantower #");
         Serial.print(plantowerScanIndex);
-        Serial.println(": ❌ No data received");
+        Serial.println("No data received");
       }
       
       currentPmsState = PMS_GO_TO_SLEEP;
       break;
 
     case PMS_GO_TO_SLEEP:
-      Serial.println("Plantower: 💤 Going to sleep (60s)...");
+      Serial.println("Plantower:Going to sleep (60s)...");
       pms.sleep();
       lastPmsWakeup = currentMillis;
       currentPmsState = PMS_WAKE_UP;
