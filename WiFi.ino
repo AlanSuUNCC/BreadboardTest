@@ -4,6 +4,10 @@
 const char* ssid = "CTPro";
 const char* password = "j1ankangyukua1";
 
+const char* ntpServer = "pool.ntp.org";
+const long  gmtOffset_sec = 0;
+const int   daylightOffset_sec = 3600;
+
 void setupWiFi() {
   Serial.print("Connecting to WiFi: ");
   Serial.print(ssid);
@@ -31,4 +35,5 @@ void setupWiFi() {
     Serial.println("WiFi connection failed!");
     Serial.println("Continuing without WiFi...");
   }
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
 }
